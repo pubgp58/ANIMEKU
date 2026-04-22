@@ -2,39 +2,50 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AnimeKu Stabil</title>
+<title>AnimeKu</title>
 
 <style>
-* { box-sizing: border-box; }
-
 body {
-  margin:0;
-  font-family: Arial, sans-serif;
   background:#0f0f0f;
   color:white;
+  font-family:Arial;
+  text-align:center;
 }
-
-/* NAVBAR */
-.navbar {
-  height:60px;
-  width:100%;
+.card {
   background:#1a1a1a;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 20px;
-  position:sticky;
-  top:0;
-  z-index:100;
+  margin:10px;
+  padding:10px;
+  border-radius:10px;
 }
+</style>
 
-.logo { color:#ffcc00; font-weight:bold; }
+</head>
+<body>
 
-.search {
-  width:180px;
-  padding:6px 10px;
-  border-radius:20px;
+<h1>AnimeKu 🔥</h1>
+<div id="list">Loading...</div>
+
+<script>
+fetch("anime.json")
+  .then(res => res.json())
+  .then(data => {
+
+    const el = document.getElementById("list");
+
+    el.innerHTML = data.map((a, i) => `
+      <div class="card">
+        <h3>${i+1}. ${a.title}</h3>
+      </div>
+    `).join("");
+
+  })
+  .catch(() => {
+    document.getElementById("list").innerText = "Gagal load database";
+  });
+</script>
+
+</body>
+</html>  border-radius:20px;
   border:none;
 }
 
